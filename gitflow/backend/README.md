@@ -91,6 +91,23 @@ And, now we're done! Congrats!!!! :tada: :tada: :tada:
 
 ## Variation: flow with extra sync (dev -> release -> prd)
 
+A very common situation that may arise once a new release branch is created is something that definitely has happened to every developer (unless, well, you aren't human): a bug.
+
+Even the the code seems to be working fine, all the tests are passing things can't still go wrong and hopefully you will have a QA analyst to help you identify the issue before the code actually reaches production.
+
+In these situations, the gitflow allows one to make commits **directly into the release branch** that will hopefully fix the branch but comes at the cost of creating bugfix code outside the develop branch and this is bad as it drives the `develop` branch farther from the code that is actually going to production and this violates one of the golden rules of this gitflow: to keep `development` and `master` as close as possible as **every new released feature will come the development branch** and that must match production as close as possible in order to have effective tests. Hence, if commiting to the `release/*` branch is a must, then do it but **do not ever forget** create two PRs when the `release/*` has been validated:
+
+- One PR to `master` (the actual code going to production)
+- One PR back to `develop` (yes, this is required to keep master, dev and future releases with the required bugfix code that was commited straight to the release branch)
+
+So, here's the flow for this scenario:
+
+![Alt text](../../assets/backend/gif/variation_extra_sync_flow.gif)
+
+And a final static image to illustrate the whole flow:
+
+![Alt text](../../assets/backend/img/variation_extra_sync_flow.png)
+
 ## Variation: flow with release reuse
 
 ## Variation: flow with two features on dev
