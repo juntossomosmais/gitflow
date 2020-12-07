@@ -13,7 +13,7 @@ The main gitflow is very easy to follow, but includes some variations that might
 - [Variation: flow with two features on dev](#variation-flow-with-two-features-on-dev)
 - [Variation: hotfix](#variation-hotfix)
 - [Variation: broken dev](#variation-broken-dev)
-    - [Fast fix](#fast-fix)
+    - [Fix it](#fix-it)
     - [Remove changes](#remove-changes)
 
 <!-- /TOC -->
@@ -99,7 +99,7 @@ And, now we're done! Congrats!!!! :tada: :tada: :tada:
 
 ![Hotfix flow](../../assets/backend/gif/hotfix.gif)
 
-Although this flow should usually be avoided, business needs is what should drive the development. So, when a wild serious bug appears in production and you need to fix it as soon as possible, it's time to create a hotfix!
+Although this flow should usually be avoided, it might happen. So, when a wild serious bug appears in production and you need to fix it as soon as possible, it's time to create a hotfix!
 
 The first step is to create your hotfix branch from the main branch. Supposing it's `master`, do the following:
 
@@ -110,21 +110,21 @@ git checkout -b hotfix/bug
 
 After fixing the bug and adding some tests for it, it's time to create the PR targeting `master`. Then, after the changes integrate on production and you guarantee that it fixes the bug, you **must** create a PR for `develop` so that the fix is also integrated there.
 
-Also, don't forget to release the fix to the QA environment (creating a `release/*` branch from `develop`). Although it can be done later, it's always important to have all environments stable!
+Finally, don't forget to release the fix to the QA environment (creating a `release/*` branch from `develop`). Although it can be done later, it's always important to have all environments stable and up to date!
 
 ## Variation: broken dev
 
-It's important to say that we should not break our development environment at all costs. It's shared between all devs and we need to ensure that it's stable enough so that everyone can work with and use it for their tasks. Saying that, we know that it can happen. We can break DEV, we can release into it a half-baked feature. And, it's totally fine!
+It's important to say that we should not break our development environment at all costs. It's shared between all devs and we need to ensure that it's stable enough so that everyone can work with and use it for their tasks. Saying that, we know that it can happen. We can break DEV, we can release into it a half-baked feature. And, it's totally fine, because:
 
 > To err is human
 
-Consider it a lesson to learn and if that happen, we have two alternatives: fix it fast or remove the changes from `develop`.
+Consider it a lesson to learn and if that happen, we have two alternatives: fix it or remove the changes from `develop`.
 
-### Fast fix
+### Fix it
 
-![Fast fix on develop](../../assets/backend/gif/fast-fix-dev.gif)
+![Fix develop](../../assets/backend/gif/fast-fix-dev.gif)
 
-If the fix is fast to do, it's simple. As any other feature, we start from `develop` a new branch (or merge the `develop` changes into your broken feature branch) and follow the normal development flow!
+If possible, we should always try to fix `develop` before any other change, because the flow is simpler. As any other feature, we start a new branch from `develop` (or merge the `develop` changes into your broken feature branch) and follow the normal development flow!
 
 ### Remove changes
 
