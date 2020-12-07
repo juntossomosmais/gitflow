@@ -10,23 +10,17 @@ The main gitflow is very easy to follow, but includes some variations that might
   - [Summary](#main-gitflow-tldr)
 - [Variation: flow with commits on the release branch](#variation-flow-with-commits-on-the-release-branch)
 - [Variation: flow with two features on dev without releases](#variation-flow-with-two-features-on-dev-without-releases)
-
-  - [If the two features CANNOT go together to production](#if-the-two-features-cannot-go-together-to-production-without-releases)
-  - [If the two features CAN go together to production](#If-the-two-features-CAN-go-together-to-production-without-releases)
-
+  - [If the two features cannot go together to production](#if-the-two-features-cannot-go-together-to-production-without-releases)
+  - [If the two features can go together to production](#if-the-two-features-can-go-together-to-production-without-releases)
 - [Variation: flow with two features on dev with release reuse](#variation-flow-with-two-features-on-dev-with-release-reuse)
-
-  - [If the two features CANNOT go together to production](#If-the-two-features-CANNOT-go-together-to-production)
-  - [If the two features CAN go together to production](#if-the-two-features-can-go-together-to-production)
-
+  - [If the two features cannot go together to production](#if-the-two-features-cannot-go-together-to-production)
+  - [If the two features can go together to production](#if-the-two-features-can-go-together-to-production)
 - [Variation: hotfix](#variation-hotfix)
 - [Variation: broken dev](#variation-broken-dev)
   - [Fix it](#fix-it)
   - [Remove changes](#remove-changes)
 
 <!-- /TOC -->
-
----
 
 ## Main gitflow
 
@@ -127,7 +121,7 @@ When this happens, **team communication becomes essential**: the **team** must d
 
 Let's discuss the two possible outcomes of the team's decision:
 
-### IF the two features CANNOT go together to production
+### If the two features cannot go together to production without releases
 
 If the team agrees that the two features cannot go together to production, and the two features are already on the `develop` branch, then `feature/feat-B` must be removed from the `develop` branch so that `feature/feat-A` can be used to create its `release/feat-A`.
 
@@ -135,7 +129,7 @@ Once `feature/feat-A` has been shipped to production, then `feature/feat-B` can 
 
 `PS`: Bear in mind that this scenario may create **bottlenecks** as one feature will have to wait for the other one to be fully merged on `master` before being allowed to create the other release branch for the `feature/feat-B`.
 
-### IF the two features CAN go together to production
+### If the two features can go together to production without releases
 
 If the team has agreed to release the two features together, then the flow is very straightforward: as the two features are already on the `develop` branch, just create a new release branch that will contain the two features together that will be shipped to production: `release/feat-A-and-B` and proceed as usual with this release branch.
 
@@ -153,13 +147,13 @@ After this, another develop also finishes writing his new feature: `feature/feat
 
 Once again, **team communication becomes essential**: the **team** must decide if the two features can be shipped together to production or not.
 
-### IF the two features CANNOT go together to production
+### If the two features cannot go together to production
 
 If the team agrees that the features cannot go together to production, then `feature/feat-B` that is on the `develop` branch will have to wait until the other feature, `feature/feat-A`, is fully shipped to production. After that happens, and `release/feat-A` no longer exists, then a new release branch, `release/feat-B`, can be created and submitted for QA analysts and PO approval.
 
 Remeber that this scenario can also create **bottlenecks** as `feature/feat-B` will have to keep waiting on `develop` until `feature/feat-A` is fully released to production and `release/feat-A` no longer exists.
 
-### IF the two features CAN go together to production
+### If the two features can go together to production
 
 If the team has agreed to release the two features together, then the **release branch that already exists can be reused** to contain the two features (`feature/feat-A` and `feature/feat-B`) together.
 
