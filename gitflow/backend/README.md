@@ -13,6 +13,8 @@ The main gitflow is very easy to follow, but includes some variations that might
 - [Variation: flow with two features on dev](#variation-flow-with-two-features-on-dev)
 - [Variation: hotfix](#variation-hotfix)
 - [Variation: broken dev](#variation-broken-dev)
+    - [Fast fix](#fast-fix)
+    - [Remove changes](#remove-changes)
 
 <!-- /TOC -->
 
@@ -73,7 +75,7 @@ When it's approved, merge the PR and you're almost done! Take a time to monitor 
 And, now we're done! Congrats!!!! :tada: :tada: :tada:
 
 <a name="main-gitflow-tldr"></a>
-### TL;DR
+### Summary
 
 1. `git checkout develop && git pull`
 2. `git checkout -b feature/xpto && git push -u origin feature/xpto`
@@ -111,3 +113,52 @@ After fixing the bug and adding some tests for it, it's time to create the PR ta
 Also, don't forget to release the fix to the QA environment (creating a `release/*` branch from `develop`). Although it can be done later, it's always important to have all environments stable!
 
 ## Variation: broken dev
+
+It's important to say that we should not break our development environment at all costs. It's shared between all devs and we need to ensure that it's stable enough so that everyone can work with and use it for their tasks. Saying that, we know that it can happen. We can break DEV, we can release into it a half-baked feature. And, it's totally fine!
+
+> To err is human
+
+Consider it a lesson to learn and if that happen, we have two alternatives: fix it fast or remove the changes from `develop`.
+
+### Fast fix
+
+![Fast fix on develop](../../assets/backend/gif/fast-fix-dev.gif)
+
+If the fix is fast to do, it's simple. As any other feature, we start from `develop` a new branch (or merge the `develop` changes into your broken feature branch) and follow the normal development flow!
+
+### Remove changes
+
+![Remove commits from develop](../../assets/backend/gif/remove-dev.gif)
+
+But, if we know that the fix will take some time, it's important to revert the introduced changes. For that we have two alternatives:
+
+- Reset the git codeline, as if the feature wasn't introduced to branch `develop`
+
+Suppose that you're at the top (`HEAD`) of your branch and the commit sitting there is a merge commit that came from your PR. If you want to remove it:
+
+```sh
+git reset --soft HEAD^ # use `--hard` instead of `--soft` if you don't want the changes
+git push --force # be very careful!
+```
+
+This will remove the commits associated with the last merged PR and rewrite the git codeline.
+
+Notice here that we used `git push --force`. It's not something we should do with frequency because it affects everyone that is sharing the same repository and if someone just did a pull with your changes before the forced push, rewriting the timeline will just blew up her local repository. Thus, it's preferable to avoid it. That leads to our second approach:
+
+- Revert the commits, creating a commit that revert them
+
+Again, suppose that you're at the `HEAD` of your branch and the merge commit is the one sitting there. Then:
+
+```sh
+git revert -m 1 HEAD
+```
+
+The command above will create the commit you want, effectively reverting all the changes introduced with the merged PR. We can also do it using the GitHub UI ([step guide](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/reverting-a-pull-request)) and it's quite easy!
+
+The thing we should be aware is that if we want our changes back we need to revert the revert. So, again, do a revert:
+
+```sh
+git revert HEAD
+```
+
+And continue your work!
