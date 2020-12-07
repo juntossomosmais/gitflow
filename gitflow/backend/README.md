@@ -121,9 +121,9 @@ And a final static image to illustrate the whole flow:
 
 This variation can be very common and depends a lot on how many developers are working with the same code base. This case usually happens when two or more developers finish writing their code on their respective feature branches, for example: `feature/feat-A` and `feature/feat-B`, and they both send their finished code to the `develop` branch. In this case, the `develop` branch will have **more than one new feature** at the same time.
 
-When this happens, **team communication becomes essential**: the **team** must decide if the two features can be shipped together to production or not.
+Notice that, in this case, NO release branches have been created. If a release branch already exists for one of the features, then skip to the next variation: `Variation: flow with release reuse`.
 
-`PS`: Notice that, in this case, NO release branch has been created for any of the features. If a release branch already exists, then skip to the next variation: `Variation: flow with release reuse`.
+When this happens, **team communication becomes essential**: the **team** must decide if the two features can be shipped together to production or not.
 
 Let's discuss the two possible outcomes of the team's decision:
 
@@ -131,13 +131,13 @@ Let's discuss the two possible outcomes of the team's decision:
 
 If the team agrees that the two features cannot go together to production, and the two features are already on the `develop` branch, then `feature/feat-B` must be removed from the `develop` branch so that `feature/feat-A` can be used to create its `release/feat-A`.
 
-Once `feature/feat-A` has been shipped to production, then `feature/feat-B` can be used to create a new release branch.
+Once `feature/feat-A` has been shipped to production, then `feature/feat-B` can be used to create a new release branch: `release/feat-B`.
 
-`PS`: Bear in mind that this scenario can create **bottlenecks** as one feature will have to wait on the other one before being tested and release to production.
+`PS`: Bear in mind that this scenario may create **bottlenecks** as one feature will have to wait for the other one to be fully merged on `master` before being allowed to create the other release branch for the `feature/feat-B`.
 
 ### IF the two features CAN go together to production
 
-If the team has agreed to release the two features together, then the flow is very straight forward: as the two features are already on the `develop` branch, just create a new release branch that will contain the two features that will be shipped to production: `release/feat-A-and-B` and proceed as usual with this release branch.
+If the team has agreed to release the two features together, then the flow is very straightforward: as the two features are already on the `develop` branch, just create a new release branch that will contain the two features together that will be shipped to production: `release/feat-A-and-B` and proceed as usual with this release branch.
 
 ![Alt text](../../assets/backend/gif/variation_two_feats_no_release_reuse.gif)
 
@@ -149,7 +149,7 @@ And a final static image to illustrate the whole flow:
 
 This variation can also be very common when the same code base is used by many developers. Here, one developer finishes writing his new feature, `feature/feat-A`, sends his code to `develop` and creates a release branch for his feature: `release/feat-A`.
 
-After this, another develop also finishes writing his new feature: `feature/feat-B` and sends it to `develop`. Now, this second developer **cannot** open another release right away as `release/feat-A` already exists and might be being used by the QA analysts. Two release branches can create a lot of confusion and must be avoided.
+After this, another develop also finishes writing his new feature: `feature/feat-B` and sends it to `develop`. Now, this second developer **cannot** open another release right away as `release/feat-A` already exists and might be being used by the QA analysts. Two release branches opened at the same time can create a lot of confusion and must be avoided, specially because a new release branch will deploy different code to the qa environment!
 
 Once again, **team communication becomes essential**: the **team** must decide if the two features can be shipped together to production or not.
 
@@ -161,16 +161,16 @@ Remeber that this scenario can also create **bottlenecks** as `feature/feat-B` w
 
 ### IF the two features CAN go together to production
 
-If the team has agreed to release the two features together, then the **release branch that already exists can reused** to contain the two features (`feature/feat-A` and `feature/feat-B`) together.
+If the team has agreed to release the two features together, then the **release branch that already exists can be reused** to contain the two features (`feature/feat-A` and `feature/feat-B`) together.
 
 The most common way to do this by rebasing the `release/feat-A` branch onto the top of the `develop` branch that already contains the new feature `feat-B`:
 
 ```bash
 git checkout release/feat-A
-git pull --rebase origin develop  # git pull with rebase instead of merging ~ git rebase develop
+git pull --rebase origin develop  # git pull with rebase instead of merge ~ git rebase develop
 ```
 
-By rebasing the `release/feat-A` branch, this release branch will now contain the two features together (`feature/feat-A` and `feature/feat-B`). After this is done, then proceed as usual with this release branch that contains the two features that will be shipped together to production.
+By rebasing the `release/feat-A` branch, this release branch will now contain the two features together (`feature/feat-A` and `feature/feat-B`). After this is done, proceed as usual with this release branch that contains the two features that will be shipped together to production.
 
 ![Alt text](../../assets/backend/gif/variation_release_reuse.gif)
 
