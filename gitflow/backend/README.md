@@ -95,4 +95,19 @@ And, now we're done! Congrats!!!! :tada: :tada: :tada:
 
 ## Variation: hotfix
 
+![Hotfix flow](../../assets/backend/gif/hotfix.gif)
+
+Although this flow should usually be avoided, business needs is what should drive the development. So, when a wild serious bug appears in production and you need to fix it as soon as possible, it's time to create a hotfix!
+
+The first step is to create your hotfix branch from the main branch. Supposing it's `master`, do the following:
+
+```sh
+git checkout master && git pull # remember to always be updated!
+git checkout -b hotfix/bug
+```
+
+After fixing the bug and adding some tests for it, it's time to create the PR targeting `master`. Then, after the changes integrate on production and you guarantee that it fixes the bug, you **must** create a PR for `develop` so that the fix is also integrated there.
+
+Also, don't forget to release the fix to the QA environment (creating a `release/*` branch from `develop`). Although it can be done later, it's always important to have all environments stable!
+
 ## Variation: broken dev
