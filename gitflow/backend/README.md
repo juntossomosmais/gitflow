@@ -91,14 +91,14 @@ And, now we're done! Congrats!!!! :tada: :tada: :tada:
 
 ## Variation: flow with extra sync (dev -> release -> prd)
 
-A very common situation that may arise once a new release branch is created is something that definitely has happened to every developer (unless, well, you aren't human): a bug.
+A very common situation that may arise once a new release branch is created is something that definitely has happened to every developer out there (unless, well, he wasn't a human at all): a bug.
 
-Even the the code seems to be working fine, all the tests are passing things can't still go wrong and hopefully you will have a QA analyst to help you identify the issue before the code actually reaches production.
+Even when the code seems to be working fine and all the tests are passing, things can still go wrong and hopefully you will have a QA analyst to help you identify the issue before the code actually reaches production.
 
-In these situations, the gitflow allows one to make commits **directly into the release branch** that will hopefully fix the branch but comes at the cost of creating bugfix code outside the develop branch and this is bad as it drives the `develop` branch farther from the code that is actually going to production and this violates one of the golden rules of this gitflow: to keep `development` and `master` as close as possible as **every new released feature will come the development branch** and that must match production as close as possible in order to have effective tests. Hence, if commiting to the `release/*` branch is a must, then do it but **do not ever forget** create two PRs when the `release/*` has been validated:
+In these situations, the gitflow allows developers to make commits **directly to the release branch** in order to fix the release but comes at the cost of creating bugfix code outside the develop branch. This is bad as it drives the `develop` branch farther from the code that is actually going to production and this violates one of the golden rules of this gitflow: to keep `develop` and `master` as close as possible as **every new released feature will come from the development branch**. Hence, if commiting to the `release/*` branch is a must, then do it but **do not ever forget** create two PRs when the `release/*` has been validated:
 
 - One PR to `master` (the actual code going to production)
-- One PR back to `develop` (yes, this is required to keep master, dev and future releases with the required bugfix code that was commited straight to the release branch)
+- One PR back to `develop` (yes, this is required to keep master, dev and future releases with the required bugfix code)
 
 So, here's the flow for this scenario:
 
@@ -109,6 +109,44 @@ And a final static image to illustrate the whole flow:
 ![Alt text](../../assets/backend/img/variation_extra_sync_flow.png)
 
 ## Variation: flow with release reuse
+
+This variation also may be very common and depends a lot on how many developers are working with the same code base. This case usually happens when two or more developers finish writing their code on their respective feature branches, for example: `feature/feat-A` and `feature/feat-B`, and they both send the finished code to the `develop` branch. In this case, the `develop` branch will have **more than one feature** that should go to production at the same time.
+
+This scenario can happen in two ways:
+
+1. The two features are on the `develop` branch, but no `release/*` branch has been created yet;
+2. One the features, for example `feature/feat-A`, has already been used to create a release `release/feat-A` whereas the other feature, `feature/feat-B` is "waiting" on the `develop` branch
+
+In both cases, one thing is totally required: **team communication**. When this situation happens, the **team** must decide if the two features can be shipped together to production or not.
+
+Let's discuss these two cases:
+
+### IF the two features cannot go together to production
+
+If the team agrees that the two features cannot go together to production, then there's nothing much to be done: `feature/feat-B` will have to wait until `release/feat-A` is merged to master and then a new release can be created `release/feat-B`.
+
+Going back to the two ways that this can happen:
+
+1. The features can't go together to production, hence `feature/feat-B` must be removed from the `develop` branch so that `feature/feat-A` can be used to create its `release/feat-A`. `feature/feat-B` will have to wait.
+
+2. In this case, as `release/feat-A` already exists, `feature/feat-B` can wait on `develop` until the other feature reaches production. After that happens, the other release `release/feat-B` can be created.
+
+`PS`: Bear in mind that this scenario can create **bottlenecks** as one feature will have to wait on the other one before being tested and release to production.
+
+### IF the two features CAN go together to production
+
+After the team has agreed to release the two features together, then:
+
+1. In this case, a single release can be created which will contain the two features together: `release/feat-A-and-B`
+2. Here, as a release branched already exists, then this release can be **reused** to contain the two features. The most common way to handle this is by rebasing the `release` branch onto the top of the `develop` branch (so that the two features will be on the same `release` branch). This is called `release reuse`.
+
+Here's the flow for the `release reuse`:
+
+![Alt text](../../assets/backend/gif/variation_release_reuse.gif)
+
+And a final static image to illustrate the whole flow:
+
+![Alt text](../../assets/backend/img/variation_release_reuse.png)
 
 ## Variation: flow with two features on dev
 
