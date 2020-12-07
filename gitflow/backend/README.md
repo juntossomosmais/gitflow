@@ -53,7 +53,7 @@ Then, when you feel confortable, just push your changes to remote!
 git push -u origin feature/xpto
 ```
 
-This will push any commit you did on your feature branch to remote and set the remote branch as a reference to your local branch, so that any `git pull` and `git push` you do later, when working in this branch, is done referencing the remote one.
+This will push any commit you did on your feature branch to remote and set the remote branch as a source reference to your local branch, so that any `git pull` and `git push` you do later, when working in this branch, is done referencing the remote one.
 
 Many `git add`, `git commit` and `git push` later, it's time to bring your new feature to the remote `develop` branch and update the development environment with your changes. But, before that, we want to evaluate what you did, checking if the changes address what the task asked, if there are enough tests, if the code can introduce any obscure bug, etc. And, for this, we run through a process called **Code Review**. It's an important step to prevent any undesirable change and to leverage the knowledge across the team.
 
@@ -68,7 +68,7 @@ git checkout -b release/xpto
 git push -u origin release/xpto
 ```
 
-Now, with the QA, or homolog, environment updated, call for a QA colleague to test your brand new feature! After her approval and with the PO consent, create a PR targeting the main production branch (usually `master`) and call for another DEV approval.
+Now, with the QA, or homolog, environment updated, call for a QA analyst to test your brand new feature! After her approval and with the product owner (PO) consent, create a PR targeting the main production branch (usually `master`) and call for another DEV approval.
 
 When it's approved, merge the PR and you're almost done! Take a time to monitor how your change affected the production environment and create a changelog to communicate everyone!
 
@@ -150,7 +150,7 @@ Notice here that we used `git push --force`. It's not something we should do wit
 Again, suppose that you're at the `HEAD` of your branch and the merge commit is the one sitting there. Then:
 
 ```sh
-git revert -m 1 HEAD
+git revert -m 1 HEAD # or the SHA commit you want to revert
 ```
 
 The command above will create the commit you want, effectively reverting all the changes introduced with the merged PR. We can also do it using the GitHub UI ([step guide](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/reverting-a-pull-request)) and it's quite easy!
@@ -158,7 +158,7 @@ The command above will create the commit you want, effectively reverting all the
 The thing we should be aware is that if we want our changes back we need to revert the revert. So, again, do a revert:
 
 ```sh
-git revert HEAD
+git revert HEAD # or the SHA commit
 ```
 
 And continue your work!
