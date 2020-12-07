@@ -7,14 +7,22 @@ The main gitflow is very easy to follow, but includes some variations that might
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
 - [Main gitflow](#main-gitflow)
-    - [Summary](#main-gitflow-tldr)
-- [Variation: flow with extra sync (dev -> release -> prd)](#variation-flow-with-extra-sync-dev---release---prd)
-- [Variation: flow with release reuse](#variation-flow-with-release-reuse)
-- [Variation: flow with two features on dev](#variation-flow-with-two-features-on-dev)
+  - [Summary](#main-gitflow-tldr)
+- [Variation: flow with commits on the release branch](#variation-flow-with-commits-on-the-release-branch)
+- [Variation: flow with two features on dev without releases](#variation-flow-with-two-features-on-dev-without-releases)
+
+  - [If the two features CANNOT go together to production](#if-the-two-features-cannot-go-together-to-production-without-releases)
+  - [If the two features CAN go together to production](#If-the-two-features-CAN-go-together-to-production-without-releases)
+
+- [Variation: flow with two features on dev with release reuse](#variation-flow-with-two-features-on-dev-with-release-reuse)
+
+  - [If the two features CANNOT go together to production](#If-the-two-features-CANNOT-go-together-to-production)
+  - [If the two features CAN go together to production](#if-the-two-features-can-go-together-to-production)
+
 - [Variation: hotfix](#variation-hotfix)
 - [Variation: broken dev](#variation-broken-dev)
-    - [Fix it](#fix-it)
-    - [Remove changes](#remove-changes)
+  - [Fix it](#fix-it)
+  - [Remove changes](#remove-changes)
 
 <!-- /TOC -->
 
@@ -75,21 +83,22 @@ When it's approved, merge the PR and you're almost done! Take a time to monitor 
 And, now we're done! Congrats!!!! :tada: :tada: :tada:
 
 <a name="main-gitflow-tldr"></a>
+
 ### Summary
 
 1. `git checkout develop && git pull`
 2. `git checkout -b feature/xpto && git push -u origin feature/xpto`
 3. Repeat `git add && git commit`, eventually `git push`, until the feature is done
-5. Create a Pull Request (PR) targeting the `develop` branch and call for any DEV to review it
-6. Do the requested changes, if necessary, until approval
-7. Merge into `develop` and delete your feature branch
-8. `git checkout develop && git pull && git checkout -b release/xpto && git push -u origin release/xpto`
-9. QA Test
-10. After QA and PO approval, create a PR targeting the `master`, or `main`, branch
-11. After the PR approval, merge it and you're almost done!
-12. Now, it's time to keep an eye if everything is fine with your feature in production and to create a changelog so everyone knows what you did!
+4. Create a Pull Request (PR) targeting the `develop` branch and call for any DEV to review it
+5. Do the requested changes, if necessary, until approval
+6. Merge into `develop` and delete your feature branch
+7. `git checkout develop && git pull && git checkout -b release/xpto && git push -u origin release/xpto`
+8. QA Test
+9. After QA and PO approval, create a PR targeting the `master`, or `main`, branch
+10. After the PR approval, merge it and you're almost done!
+11. Now, it's time to keep an eye if everything is fine with your feature in production and to create a changelog so everyone knows what you did!
 
-## Variation: flow with extra sync (dev -> release -> prd)
+## Variation: flow with commits on the release branch
 
 A very common situation that may arise once a new release branch is created is something that definitely has happened to every developer out there (unless, well, he wasn't a human at all): a bug.
 
@@ -108,7 +117,7 @@ And a final static image to illustrate the whole flow:
 
 ![Alt text](../../assets/backend/img/variation_extra_sync_flow.png)
 
-## Variation: two features on dev before any release
+## Variation: flow with two features on dev without releases
 
 This variation can be very common and depends a lot on how many developers are working with the same code base. This case usually happens when two or more developers finish writing their code on their respective feature branches, for example: `feature/feat-A` and `feature/feat-B`, and they both send their finished code to the `develop` branch. In this case, the `develop` branch will have **more than one new feature** at the same time.
 
@@ -136,7 +145,7 @@ And a final static image to illustrate the whole flow:
 
 ![Alt text](../../assets/backend/img/variation_two_feats_no_release_reuse.png)
 
-## Variation: two features on dev with release reuse
+## Variation: flow with two features on dev with release reuse
 
 This variation can also be very common when the same code base is used by many developers. Here, one developer finishes writing his new feature, `feature/feat-A`, sends his code to `develop` and creates a release branch for his feature: `release/feat-A`.
 
