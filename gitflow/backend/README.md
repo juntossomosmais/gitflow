@@ -105,11 +105,11 @@ In these situations, the gitflow allows developers to make commits **directly to
 
 So, here's the flow for this scenario:
 
-![Alt text](../../assets/backend/gif/variation-extra-sync-flow.gif)
+![Alt text](../../assets/backend/gif/variation-release-commits.gif)
 
 And a final static image to illustrate the whole flow:
 
-![Alt text](../../assets/backend/img/variation-extra-sync-flow.png)
+![Alt text](../../assets/backend/img/variation-release-commits.png)
 
 ## Variation: flow with two features on dev without releases
 
