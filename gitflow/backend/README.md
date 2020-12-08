@@ -105,11 +105,11 @@ In these situations, the gitflow allows developers to make commits **directly to
 
 So, here's the flow for this scenario:
 
-![Alt text](../../assets/backend/gif/variation_extra_sync_flow.gif)
+![Alt text](../../assets/backend/gif/variation-extra-sync-flow.gif)
 
 And a final static image to illustrate the whole flow:
 
-![Alt text](../../assets/backend/img/variation_extra_sync_flow.png)
+![Alt text](../../assets/backend/img/variation-extra-sync-flow.png)
 
 ## Variation: flow with two features on dev without releases
 
@@ -133,11 +133,11 @@ Once `feature/feat-A` has been shipped to production, then `feature/feat-B` can 
 
 If the team has agreed to release the two features together, then the flow is very straightforward: as the two features are already on the `develop` branch, just create a new release branch that will contain the two features together that will be shipped to production: `release/feat-A-and-B` and proceed as usual with this release branch.
 
-![Alt text](../../assets/backend/gif/variation_two_feats_no_release_reuse.gif)
+![Alt text](../../assets/backend/gif/variation-two-feats-no-release-reuse.gif)
 
 And a final static image to illustrate the whole flow:
 
-![Alt text](../../assets/backend/img/variation_two_feats_no_release_reuse.png)
+![Alt text](../../assets/backend/img/variation-two-feats-no-release-reuse.png)
 
 ## Variation: flow with two features on dev with release reuse
 
@@ -166,11 +166,11 @@ git pull --rebase origin develop  # git pull with rebase instead of merge ~ git 
 
 By rebasing the `release/feat-A` branch, this release branch will now contain the two features together (`feature/feat-A` and `feature/feat-B`). After this is done, proceed as usual with this release branch that contains the two features that will be shipped together to production.
 
-![Alt text](../../assets/backend/gif/variation_release_reuse.gif)
+![Alt text](../../assets/backend/gif/variation-release-reuse.gif)
 
 And a final static image to illustrate the whole flow:
 
-![Alt text](../../assets/backend/img/variation_release_reuse.png)
+![Alt text](../../assets/backend/img/variation-release-reuse.png)
 
 ## Variation: hotfix
 
