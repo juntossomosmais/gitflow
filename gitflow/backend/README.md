@@ -105,17 +105,17 @@ In these situations, the gitflow allows developers to make commits **directly to
 
 So, here's the flow for this scenario:
 
-![Alt text](../../assets/backend/gif/variation-release-commits.gif)
+![Variation Release Commits](../../assets/backend/gif/variation-release-commits.gif)
 
 And a final static image to illustrate the whole flow:
 
-![Alt text](../../assets/backend/img/variation-release-commits.png)
+![Variation Release Commits Complete Flow](../../assets/backend/img/variation-release-commits.png)
 
 ## Variation: flow with two features on dev without releases
 
 This variation can be very common and depends a lot on how many developers are working with the same code base. This case usually happens when two or more developers finish writing their code on their respective feature branches, for example: `feature/feat-A` and `feature/feat-B`, and they both send their finished code to the `develop` branch. In this case, the `develop` branch will have **more than one new feature** at the same time.
 
-Notice that, in this case, NO release branches have been created. If a release branch already exists for one of the features, then skip to the next variation: `Variation: flow with release reuse`.
+Notice that, in this case, NO release branches have been created. If a release branch already exists for one of the features, then skip to the next variation: [Variation: flow with two features on dev with release reuse](#variation-flow-with-two-features-on-dev-with-release-reuse).
 
 When this happens, **team communication becomes essential**: the **team** must decide if the two features can be shipped together to production or not.
 
@@ -133,11 +133,11 @@ Once `feature/feat-A` has been shipped to production, then `feature/feat-B` can 
 
 If the team has agreed to release the two features together, then the flow is very straightforward: as the two features are already on the `develop` branch, just create a new release branch that will contain the two features together that will be shipped to production: `release/feat-A-and-B` and proceed as usual with this release branch.
 
-![Alt text](../../assets/backend/gif/variation-two-feats-no-release-reuse.gif)
+![Variation Two Features No Releases](../../assets/backend/gif/variation-two-feats-no-release-reuse.gif)
 
 And a final static image to illustrate the whole flow:
 
-![Alt text](../../assets/backend/img/variation-two-feats-no-release-reuse.png)
+![Variation Two Features No Releases Complete Flow](../../assets/backend/img/variation-two-feats-no-release-reuse.png)
 
 ## Variation: flow with two features on dev with release reuse
 
@@ -166,11 +166,11 @@ git pull --rebase origin develop  # git pull with rebase instead of merge ~ git 
 
 By rebasing the `release/feat-A` branch, this release branch will now contain the two features together (`feature/feat-A` and `feature/feat-B`). After this is done, proceed as usual with this release branch that contains the two features that will be shipped together to production.
 
-![Alt text](../../assets/backend/gif/variation-release-reuse.gif)
+![Variation Release Reuse](../../assets/backend/gif/variation-release-reuse.gif)
 
 And a final static image to illustrate the whole flow:
 
-![Alt text](../../assets/backend/img/variation-release-reuse.png)
+![Variation Release Reuse Complete Flow](../../assets/backend/img/variation-release-reuse.png)
 
 ## Variation: hotfix
 
