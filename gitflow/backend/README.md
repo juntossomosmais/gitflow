@@ -151,7 +151,7 @@ Once again, **team communication becomes essential**: the **team** must decide i
 
 If the team agrees that the features cannot go together to production, then `feature/feat-B` that is on the `develop` branch will have to wait until the other feature, `feature/feat-A`, is fully shipped to production. After that happens, and `release/feat-A` no longer exists, then a new release branch, `release/feat-B`, can be created and submitted for QA analysts and PO approval.
 
-Remeber that this scenario can also create **bottlenecks** as `feature/feat-B` will have to keep waiting on `develop` until `feature/feat-A` is fully released to production and `release/feat-A` no longer exists.
+Remember that this scenario can also create **bottlenecks** as `feature/feat-B` will have to keep waiting on `develop` until `feature/feat-A` is fully released to production and `release/feat-A` no longer exists.
 
 ### If the two features can go together to production
 
