@@ -28,14 +28,14 @@ The main gitflow is very easy to follow, but includes some variations that might
 
 The main flow is easy to follow and the one we should strive to achieve. But, first things first, you should pair your local `develop` branch with what is on remote.
 
-```sh
+```bash
 git checkout develop
 git pull
 ```
 
 Then, it's time to create your feature branch:
 
-```sh
+```bash
 git checkout -b feature/xpto # or git branch feature/xpto && git checkout feature/xpto
 ```
 
@@ -43,7 +43,7 @@ If your local development workspace doesn't have the `feature/xpto` branch, the 
 
 Now, it's time to code! After you made your changes and think you have enough code to constitute a commit (a package with changes), create it with:
 
-```sh
+```bash
 git add changed-file # if you want to add all changes made to all files into one commit: git add .
 git commit -m "nice commit message" -m "More description" \
            -m "How many paragraphs can I stack?" -m "I don't know" # or `git commit` to bring your git editor (usually `vim`)
@@ -51,7 +51,7 @@ git commit -m "nice commit message" -m "More description" \
 
 Then, when you feel confortable, just push your changes to remote!
 
-```sh
+```bash
 git push -u origin feature/xpto
 ```
 
@@ -63,7 +63,7 @@ So, now, you need to create a merge request or a Pull Request (PR)! For that, us
 
 With everything smooth on our development environment, you can delete your feature branch and create a new release branch!
 
-```sh
+```bash
 git push -d origin feature/xpto # delete the feature branch from origin (remote)
 git checkout develop && git pull
 git checkout -b release/xpto
@@ -180,7 +180,7 @@ Although this flow should usually be avoided, it might happen. So, when a wild s
 
 The first step is to create your hotfix branch from the main branch. Supposing it's `master`, do the following:
 
-```sh
+```bash
 git checkout master && git pull # remember to always be updated!
 git checkout -b hotfix/bug
 ```
@@ -213,7 +213,7 @@ But, if we know that the fix will take some time, it's important to revert the i
 
 Suppose that you're at the top (`HEAD`) of your branch and the commit sitting there is a merge commit that came from your PR. If you want to remove it:
 
-```sh
+```bash
 git reset --soft HEAD^ # use `--hard` instead of `--soft` if you don't want the changes
 git push --force # be very careful!
 ```
@@ -226,7 +226,7 @@ Notice here that we used `git push --force`. It's not something we should do wit
 
 Again, suppose that you're at the `HEAD` of your branch and the merge commit is the one sitting there. Then:
 
-```sh
+```bash
 git revert -m 1 HEAD # or the SHA commit you want to revert
 ```
 
@@ -234,7 +234,7 @@ The command above will create the commit you want, effectively reverting all the
 
 The thing we should be aware is that if we want our changes back we need to revert the revert. So, again, do a revert:
 
-```sh
+```bash
 git revert HEAD # or the SHA commit
 ```
 
