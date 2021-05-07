@@ -187,7 +187,9 @@ git checkout -b hotfix/bug
 
 After fixing the bug and adding some tests for it, it's time to create the PR targeting `master`. Then, after the changes integrate on production and you guarantee that it fixes the bug, you **must** create a PR for `develop` so that the fix is also integrated there.
 
-Finally, don't forget to release the fix to the QA environment (creating a `release/*` branch from `develop`). Although it can be done later, it's always important to have all environments stable and up to date!
+*__CAUTION: it may happen that at the time of the PR for `develop` (`develop` <- `hotfix`) there are divergences between the branches, as probably the branch `develop` will have been evolved. So the way to resolve conflicts is to merge manually from `develop` to `hotfix` before you open PR from `hotfix` to `develop`. However, if this manual merge occurs before the PR for the `master` to take effect, you will bring from `develop` unwanted changes at that moment to `master`!!! So only open a PR to `develop` after the merge to `master` is finished.__*
+
+Finally, don't forget to release the fix to the QA environment (creating a `release/*` branch from `develop` or following one of its variations). Although it can be done later, it's always important to have all environments stable and up to date!
 
 ## Variation: broken dev
 
