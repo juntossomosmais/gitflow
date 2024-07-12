@@ -1,5 +1,7 @@
 # Gitflow: Backend
 
+> This document outlines the default and recommended development flow for our teams. However, it's important to note that variations to this process may occur as detailed in the `CONTRIBUTING.md` of each repository. Teams can adapt the process as necessary to meet their specific needs.
+
 The main gitflow is very easy to follow, but includes some variations that might happen on our day-to-day work and are also explained here.
 
 **Content**
